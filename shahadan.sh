@@ -11,10 +11,15 @@ STR1=$'CREATE TABLE '$H' (
 )'
 echo "$STR1" > 002-createtable.sql
 mysql --user=rawuser1 --password=rawuser123 rawdb < 002-createtable.sql
-F=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1 > 3-randstring`
-L=`md5 - q 3-randstring` 
-STR2=$'INSERT INTO $H (firstkey, lastkey, mypoint, reg_date)
-VALUES ($F, $L, 2000000000, NOW()
+cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1 > 003-randstring
+echo "First Key"
+cat  003-randstring
+F=`cat 003-randstring`
+echo "Second Key"
+md5 -q 003-randstring
+L=`md5 -q 003-randstring` 
+STR2=$'INSERT INTO '$H' (firstkey, lastkey, mypoint, reg_date)
+	VALUES ("'$F'", "'$L'", 2000000000, NOW()
 )'
-echo "$STR2" > 4-insertintotable.sql
-mysql --user=rawuser1 --password=rawuser123 rawdb < 4-insertintotable.sql
+echo "$STR2" > 004-insertintotable.sql
+mysql --user=rawuser1 --password=rawuser123 rawdb < 004-insertintotable.sql
