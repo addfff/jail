@@ -4,19 +4,13 @@
 #include <sys/wait.h>
 
 
-int main( void ) {
-	char *argv[3] = {"Command-line", ".", NULL};
+int main(int argc, char *argv[]) 
+{
+	int ret;
+	printf("Calling execl....\n");
+	ret = execl("/bin/ls", "ls", "-l", NULL);
 
-	int pid = fork();
-
-	if ( pid == 0 ) {
-		execvp( "cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1 > /tmp/101-randstring", argv );
-	}
-
-	sleep(2);
-
-	printf( "Finished executing the parent process\n"
-	        " - the child won't get here--you will only see this once\n" );
+	printf("Failed execl.. ret = %d\n*, ret");
 
 	return 0;
 }
