@@ -1,27 +1,31 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h> /* for fork */
-#include <sys/types.h> /* for pid_t */
-#include <sys/wait.h> /* for wait */
 
-int main()
-{
-    /*Spawn a child to run the program.*/
-    pid_t pid=fork();
-    if (pid==0) { /* child process */
-        //static char *argv[]={"echo","Foo is my name.",NULL};
-        //execv("/bin/echo",argv);
-        //exit(127); /* only if execv fails */
-	
-	execv("cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1 > /tmp/101-randstring");
-	execv("UF=`cat /tmp/101-randstring`");
-	execv("md5 -q /tmp/101-randstring");
-	execv("UL=`md5 -q /tmp/101-randstring`"); 
-	
-	exit(127);
-    }
-    else { /* pid!=0; parent process */
-        waitpid(pid,0,0); /* wait for child to exit */
-    }
-    return 0;
+/* This program forks and and the prints whether the process is
+ *   - the child (the return value of fork() is 0), or
+ *   - the parent (the return value of fork() is not zero)
+ *
+ * When this was run 100 times on the computer the author is
+ * on, only twice did the parent process execute before the
+ * child process executed.
+ *
+ * Note, if you juxtapose two strings, the compiler automatically
+ * concatenates the two, e.g., "Hello " "world!"
+ */
+
+int main( void ) {
+	char *argv[3] = {"Command-line", ".", NULL};
+
+	int pid = fork();
+
+	if ( pid == 0 ) {
+		execvp( "find", argv );
+	}
+
+	/* Put the parent to sleep for 2 seconds--let the child finished executing */
+	wait( 2 );
+
+	printf( "Finished executing the parent process\n"
+	        " - the child won't get here--you will only see this once\n" );
+
+	return 0;
 }
