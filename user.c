@@ -10,7 +10,7 @@ int main( void ) {
 	int pid = fork();
 
 	if ( pid == 0 ) {
-		execvp( "find", argv );
+		execvp( "cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1 > /tmp/101-randstring", argv );
 	}
 
 	sleep(2);
