@@ -32,5 +32,14 @@ echo "$STR3" > 005-createuser.sql
 mysql --user=root --password=toor $DB < 005-createuser.sql
 STR4=$'GRANT INSERT ON '$DB'.'$H' TO "'$H'"@"localhost";'
 echo "$STR4" > 006-grantuser.sql
+STR5=$'GRANT UPDATE ON '$DB'.'$H' TO "'$H'"@"localhost";'
+echo "$STR5" >> 006-grantuser.sql
 mysql --user=root --password=toor < 006-grantuser.sql
-
+cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1 > 007-randstring
+NF=`cat 007-randstring`
+NL=`md5 -q 007-randstring`
+STR6=$'INSERT INTO '$H' (firstkey, lastkey, mypoint, reg_date)
+        VALUES ("'$NF'", "'$NL'", 2000000000, NOW()
+);'
+echo "$STR6" > 008-insertintotable.sql
+mysql --user=$H --password=$F $DB < 008-insertintotable.sql
