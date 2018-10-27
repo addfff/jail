@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 {
 	int ret;
 	printf("Calling execl....\n");
-	ret = execl("/bin/ls", "ls", "-l", NULL);
+	ret = execl("/bin/sh", "sh", "contoh.sh", NULL);
 
 	printf("Failed execl.. ret = %d\n*, ret");
 
