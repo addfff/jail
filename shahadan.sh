@@ -1,4 +1,5 @@
 #!/bin/sh
+rm 00*
 echo 'hostname='$HOST
 hostname -s > 001-h
 H=`cat 001-h`
@@ -24,10 +25,12 @@ STR2=$'INSERT INTO '$H' (firstkey, lastkey, mypoint, reg_date)
 );'
 echo "$STR2" > 004-insertintotable.sql
 mysql --user=rawuser1 --password=rawuser123 $DB < 004-insertintotable.sql
+echo "Remember First Key is Password"
+echo $F
 STR3=$'CREATE USER "'$H'"@"localhost" IDENTIFIED BY "'$F'";'
 echo "$STR3" > 005-createuser.sql
 mysql --user=root --password=toor $DB < 005-createuser.sql
-STR4=$'GRANT INSERT ON '$DB'.'$H' TO "'$H'"@"localhost";
+STR4=$'GRANT INSERT ON '$DB'.'$H' TO "'$H'"@"localhost";'
 echo "$STR4" > 006-grantuser.sql
 mysql --user=root --password=toor < 006-grantuser.sql
 
