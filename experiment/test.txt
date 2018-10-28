@@ -1,1 +1,3 @@
-234
+INSERT INTO j1 (firstkey, lastkey, mypoint, reg_date)
+	VALUES ("5zMXWpO2s2", "b891dd81639af9a5eefa9c5266510a55", 2000000000, NOW()
+);

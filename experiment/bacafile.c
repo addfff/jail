@@ -4,7 +4,7 @@ int main(int argc, char *argv[]){
 	FILE *fs;
 	char ch;
 	int num;
-	fs = fopen("test.txt", "r");
+	fs = fopen("nombor.txt", "r");
 	ch = fgetc(fs);
 	num = atoi(&ch);
 	num = num + 10;
