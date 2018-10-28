@@ -9,8 +9,9 @@ int main(int argc, char *argv[])
 	int ret;
 	printf("Calling execl....\n");
 	/* ret = execl("/bin/sh", "sh", "user.sh", NULL);*/
-	ret = execl("/usr/local/bin/mysql", "mysql", "--user=j1", "--password=7PfA9oAwps", "j1", "<", "0013-insertintotable.sql", NULL);
-
+	/* ret = execl("/usr/local/bin/mysql", "mysql", "--user=j1", "--password=7PfA9oAwps", "j1", "<", "0013-insertintotable.sql", NULL); */
+        ret = execl("/usr/local/bin/mysql", "mysql", "rawdb","-u", "root","--password=toor", NULL);
+	printf("7PfA9oAwps");
 	printf("Failed execl.. ret = %d\n*, ret");
 
 	return 0;
