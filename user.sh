@@ -12,8 +12,6 @@ NF=`cat 0012-randstring`
 echo "Second Key"
 NL=`md5 -q 0012-randstring`
 echo $NL 
-STR2=$'INSERT INTO '$H' (firstkey, lastkey, mypoint, reg_date)
-	VALUES ("'$NF'", "'$NL'", 2000000000, NOW()
-);'
+STR2=$'INSERT INTO '$H' (firstkey, lastkey, mypoint, reg_date) VALUES ("'$NF'", "'$NL'", 2000000000, NOW())'
 echo "$STR2" > 0013-insertintotable.sql
 
