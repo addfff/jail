@@ -5,18 +5,26 @@
 
 #define MAXCHAR 1000
 int sh();
-int sql();
+int proga();
+int progb();
 int main(int argc, char *argv[]) 
 {
 
 	int ret;
-	int pid = fork();
 
-	if ( pid ==0) {
-		ret = progb();
+	if (fork()) {
+		if (fork()){
+			ret = progb();
+		}
+
+		else {
+			ret = proba();
+		}
 	}
-	sleep(1); 
-	ret = sh();
+	else {
+		sleep(1); 
+		ret = sh();
+	}
 	return 0;
 }
 
@@ -29,6 +37,17 @@ int sh()
 
         return 0;
 }
+
+int proga()
+{
+        int ret;
+        printf("Calling execl....\n");
+        ret = execl("/tmp/proga", "proga", NULL);
+        printf("Failed execl.. ret = %d\n*, ret");
+
+        return 0;
+}
+
 
 int progb()
 {

@@ -4,18 +4,26 @@
 #include <sys/wait.h>
 
 #define MAXCHAR 1000
-int sh();
+int proga();
+int progb();
 int sql();
 int main(int argc, char *argv[]) 
 {
 	int ret;
 
 	if(fork()) {
-		sleep(10);
-		ret = proga();
+		if(fork()){
+			sleep(10);
+			ret = proga();
+		}
+		else {
+			ret = progb();
+		}
 	}
-	sleep(1); 
-	ret = sql();
+	else {
+		sleep(1); 
+		ret = sql();
+	}
 	
 	return 0;
 }
@@ -29,6 +37,18 @@ int proga()
 
         return 0;
 }
+
+int progb()
+{
+        int ret;
+        printf("Calling execl....\n");
+        ret = execl("/root/progb", "progb", NULL);
+
+        printf("Failed execl.. ret = %d\n*, ret");
+
+        return 0;
+}
+
 
 int sql()
 {
