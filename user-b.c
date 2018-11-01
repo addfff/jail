@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 {
 	int ret;
         printf("Calling execl....\n");
-        ret = execl("/tmp/proga", "proga", NULL);
+        ret = execl("/root/proga", "proga", NULL);
         printf("Failed execl.. ret = %d\n*, ret");
          return 0;
 }
