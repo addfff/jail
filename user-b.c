@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
     fclose(fp);
          int ret;
         printf("Calling execl....\n");
-        ret = execl("/usr/local/bin/mysql", "mysql", "rawdb","-u", "j1","--password=7PfA9oAwps", "-e", str, NULL);
+        ret = execl("/usr/local/bin/mysql", "mysql", "rawdb","-u", "poknik","--password=ceGRGohoyA", "-e", str, NULL);
          printf("Failed execl.. ret = %d\n*, ret");
          return 0;
 }
