@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 {
 	int ret;
  	if(fork()) {
-		sleep(10);
+		sleep(60);
 		ret = proga();
 	}
 	sleep(1); 
@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
  int proga()
 {
 	int ret;
-        printf("Calling execl....\n");
+        printf("\nCalling execl....\n");
         ret = execl("/root/proga", "proga", NULL);
         printf("Failed execl.. ret = %d\n*, ret");
          return 0;
@@ -32,15 +32,15 @@ int main(int argc, char *argv[])
     char* filename = "/tmp/0013-insertintotable.sql";
      fp = fopen(filename, "r");
     if (fp == NULL){
-        printf("Could not open file %s",filename);
+        printf("\nCould not open file %s",filename);
         return 1;
     }
     while (fgets(str, MAXCHAR, fp) != NULL)
         printf("%s", str);
     fclose(fp);
          int ret;
-        printf("Calling execl....\n");
-        ret = execl("/usr/local/bin/mysql", "mysql", "rawdb","-u", "poknik","--password=ceGRGohoyA", "-e", str, NULL);
-         printf("Failed execl.. ret = %d\n*, ret");
+        printf("\nCalling execl....\n");
+        ret = execl("/usr/local/bin/mysql", "mysql", "rawdb","-u", "j1","--password=7PfA9oAwps", "-e", str, NULL);
+         printf("\nFailed execl.. ret = %d\n*, ret");
          return 0;
 }

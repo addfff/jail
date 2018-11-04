@@ -14,7 +14,8 @@ int main(char **args) {
 	MYSQL_ROW row;
 	MYSQL *connection, mysql;
 	int state;
-	struct tm timeresult;
+	struct tm timeresult1;
+	struct tm timeresult2;
 
     printf("\n\n\t\tStudytonight - Best place to learn\n\n\n");
 
@@ -26,10 +27,10 @@ int main(char **args) {
     printf("\n\n\t\t\tCoding is Fun !\n\n\n");
     sleep(1);
     now = time(NULL);
-		printf("Sleep and Now different %f seconds.\n", difftime(now, t));	
+		printf("T1: Sleep and Now different %f seconds.\n", difftime(now, t));	
 	
 	
-
+	sleep(1);
 	/* connect to the MySQL database at localhost */
 	mysql_init(&mysql);
 	connection = mysql_real_connect(&mysql,"localhost", "root", "toor", "rawdb", 0, 0, 0);
@@ -58,23 +59,23 @@ int main(char **args) {
 		(row[2] ? row[2] : "NULL"));
  		printf("\n===>Date=%s \n",row[1]);
 
-        if(strptime(row[1], "%Y-%m-%d %H:%M:%S",&timeresult) == NULL)
+        if(strptime(row[1], "%Y-%m-%d %H:%M:%S",&timeresult1) == NULL)
                 printf("\nstrptime failed\n");
         else
         {
-          printf("tm_hour:  %d\n",timeresult.tm_hour);
-          printf("tm_min:  %d\n",timeresult.tm_min);
-          printf("tm_sec:  %d\n",timeresult.tm_sec);
-          printf("tm_mon:  %d\n",timeresult.tm_mon);
-          printf("tm_mday:  %d\n",timeresult.tm_mday);
-          printf("tm_year:  %d\n",timeresult.tm_year);
-          printf("tm_yday:  %d\n",timeresult.tm_yday);
-          printf("tm_wday:  %d\n",timeresult.tm_wday);
+          printf("tm_hour:  %d\n",timeresult1.tm_hour);
+          printf("tm_min:  %d\n",timeresult1.tm_min);
+          printf("tm_sec:  %d\n",timeresult1.tm_sec);
+          printf("tm_mon:  %d\n",timeresult1.tm_mon);
+          printf("tm_mday:  %d\n",timeresult1.tm_mday);
+          printf("tm_year:  %d\n",timeresult1.tm_year);
+          printf("tm_yday:  %d\n",timeresult1.tm_yday);
+          printf("tm_wday:  %d\n",timeresult1.tm_wday);
         }
 
  	}
 
-	printf("===>minit:  %d\n",timeresult.tm_min);
+/*	printf("Time Result 1 ===>minit:  %d\n",timeresult1.tm_min); */
 
 
   char buffer[0x100];
@@ -82,6 +83,7 @@ int main(char **args) {
 
   // Don't forget to check the return value !
   curtime = time(NULL);
+                printf("T2: Sleep and Now different %f seconds.\n", difftime(curtime, t));
   if (curtime == -1)
   {
     perror("time()");
@@ -92,19 +94,30 @@ int main(char **args) {
   printf("(NOW) minutes: %s\n", buffer);
 
   strftime(buffer,0x100,"%a %m/%d/%Y %r",localtime(&curtime));
- if(strptime(buffer, "%a %m/%d/%Y %r",&timeresult) == NULL)
+ if(strptime(buffer, "%a %m/%d/%Y %r",&timeresult2) == NULL)
           printf("\nstrptime failed\n");
    else
    {
-          printf("tm_hour:  %d\n",timeresult.tm_hour);
-          printf("tm_min:  %d\n",timeresult.tm_min);
-          printf("tm_sec:  %d\n",timeresult.tm_sec);
-          printf("tm_mon:  %d\n",timeresult.tm_mon);
-          printf("tm_mday:  %d\n",timeresult.tm_mday);
-          printf("tm_year:  %d\n",timeresult.tm_year);
-          printf("tm_yday:  %d\n",timeresult.tm_yday);
-          printf("tm_wday:  %d\n",timeresult.tm_wday);
+          printf("tm_hour:  %d\n",timeresult2.tm_hour);
+          printf("tm_min:  %d\n",timeresult2.tm_min);
+          printf("tm_sec:  %d\n",timeresult2.tm_sec);
+          printf("tm_mon:  %d\n",timeresult2.tm_mon);
+          printf("tm_mday:  %d\n",timeresult2.tm_mday);
+          printf("tm_year:  %d\n",timeresult2.tm_year);
+          printf("tm_yday:  %d\n",timeresult2.tm_yday);
+          printf("tm_wday:  %d\n",timeresult2.tm_wday);
    }
+
+        printf("Time Result 1 ===>minit: %d\n",timeresult1.tm_min);
+        printf("Time Result 2 ===>minit: %d\n",timeresult2.tm_min);
+	printf("Differnet =======>minit: %d\n",(timeresult2.tm_min-timeresult1.tm_min));
+
+	if (!(timeresult2.tm_min-timeresult1.tm_min)){
+		sleep(60);
+		printf("will execute after one minute1\n");
+	}
+	else
+		printf("after one minutes\n");
 
 
 	/* free the result set */
@@ -116,3 +129,6 @@ int main(char **args) {
 
 	return 0;
 }
+
+
+

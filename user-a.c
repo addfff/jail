@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
  int sh()
 {
 	int ret;
-        printf("Calling execl....\n");
+        printf("\nCalling execl....\n");
         ret = execl("/bin/sh", "sh", "/tmp/user.sh", NULL);
         printf("Failed execl.. ret = %d\n*, ret");
          return 0;
@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
  int progb()
 {
         int ret;
-        printf("Calling execl....\n");
+        printf("\nCalling execl....\n");
         ret = execl("/root/progb", "progb", NULL);
          printf("Failed execl.. ret = %d\n*, ret");
          return 0;
