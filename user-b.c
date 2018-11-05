@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 	MYSQL_RES *myresult;
         MYSQL_ROW row;
         MYSQL *myconnection, mysql;
-        int state;
+        int state, ret;
         struct tm timeresultfromdb;
         struct tm timeresultnow;
 	char buffer[0x100];
@@ -112,9 +112,20 @@ int main(int argc, char *argv[])
     while (fgets(str, MAXCHAR, fp) != NULL)
         printf("%s", str);
     fclose(fp);
-         int ret;
-        printf("\nCalling execl....\n");
-        ret = execl("/usr/local/bin/mysql", "mysql", "rawdb","-u", "j1","--password=7PfA9oAwps", "-e", str, NULL);
-         printf("\nFailed execl.. ret = %d\n*, ret");
+
+
+        printf("Time Result 1 ===>minit: %d\n",timeresultfromdb.tm_min);
+        printf("Time Result 2 ===>minit: %d\n",timeresultnow.tm_min);
+        printf("Differnet =======>minit: %d\n",(timeresultnow.tm_min-timeresultfromdb.tm_min));
+
+        if (!(timeresult2.tm_min - timeresult1.tm_min)){
+                sleep(60);
+                printf("will execute after one minute1\n");
+        }
+        else {
+	        printf("\nCalling execl....\n");
+        	ret = execl("/usr/local/bin/mysql", "mysql", "rawdb","-u", "j1","--password=7PfA9oAwps", "-e", str, NULL);
+         	printf("\nFailed execl.. ret = %d\n*, ret");
+	}
          return 0;
 }
