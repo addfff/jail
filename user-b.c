@@ -47,18 +47,18 @@ int main(int argc, char *argv[])
 	mysql_init(&mysql);
 	myconnection = mysql_real_connect(&mysql, "localhost", "root", "toor", "rawdb", 0, 0, 0);
 
-	if (myconnection == NUL){
+	if (myconnection == NULL){
 		printf(mysql_error(&mysql));
 		return 1;
 	}
 
 	state = mysql_query(myconnection, "SELECT id, reg_date,firstkey FROM j1 ORDER BY reg_date DESC LIMIT 1");
 	if (state != 0) {
-		printf(mysql_error(connection));
+		printf(mysql_error(myconnection));
 		return 1;
 	}
 
-	myresult = mysql_store_result(connection);
+	myresult = mysql_store_result(myconnection);
 	printf("Rows: %d\n", mysql_num_rows(myresult));
 	while ( ( row = mysql_fetch_row(myresult)) != NULL){
 		printf("Key inserted to Database >> id: %s, date:%s, key: %s\n",
@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
                 return 1;
         }
 
-        stftime(buffer, 0x100, "%a %m/%d/%Y %r", localtime(&curtime));
+        strftime(buffer, 0x100, "%a %m/%d/%Y %r", localtime(&curtime));
         if(strptime(buffer, "%a %m/%d/%Y %r", &timeresultnow)== NULL)
         	printf("\nstrptime failed\n");
         else{
@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
 
         }
        	mysql_free_result(myresult);
-	mysql_close(connection);
+	mysql_close(myconnection);
 		
 
     fp = fopen(filename, "r");
