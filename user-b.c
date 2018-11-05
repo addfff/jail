@@ -118,7 +118,7 @@ int main(int argc, char *argv[])
         printf("Time Result 2 ===>minit: %d\n",timeresultnow.tm_min);
         printf("Differnet =======>minit: %d\n",(timeresultnow.tm_min-timeresultfromdb.tm_min));
 
-        if (!(timeresult2.tm_min - timeresult1.tm_min)){
+        if (!(timeresultnow.tm_min - timeresultfromdb.tm_min)){
                 sleep(60);
                 printf("will execute after one minute1\n");
         }
